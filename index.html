@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>عالم الحلويات الناري - Cyber Flame Realm</title>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" />
+
+<style>
+/* ============ RESET & CYBER FLAME THEME ============ */
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{
+  font-family:'Cairo', system-ui, -apple-system, sans-serif;
+  background:#0d0806;
+  color:#f3e8e2;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+body{
+  background:
+    radial-gradient(ellipse 900px 600px at 85% 5%, rgba(249, 115, 22, 0.2) 0%, transparent 60%),
+    radial-gradient(ellipse 800px 700px at 10% 90%, rgba(239, 68, 68, 0.15) 0%, transparent 60%),
+    linear-gradient(180deg, #0d0806 0%, #050302 100%);
+  background-attachment:fixed;
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit}
+img{max-width:100%;display:block}
+
+/* ============ SCREENS & LAYOUT ============ */
+.screen{display:none;min-height:100vh;width:100%;padding-bottom:40px}
+.screen.active{display:block !important}
+.container{max-width:640px;margin:0 auto;padding:0 16px}
+
+.neon-text{
+  background:linear-gradient(90deg,#f97316,#ef4444,#eab308);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  font-weight:900;
+  text-shadow:0 0 18px rgba(249,115,22,0.4);
+}
+.text-muted{color:rgba(243,232,226,0.6)}
+.text-tiny{font-size:11px}
+.text-sm{font-size:13px}
+.bold{font-weight:700}
+.center{text-align:center}
+
+.flex{display:flex}.flex-col{display:flex;flex-direction:column}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-2{gap:8px}.gap-3{gap:12px}
+.mt-2{margin-top:8px}.mt-3{margin-top:12px}.mt-4{margin-top:16px}
+.mb-2{margin-bottom:8px}.mb-3{margin-bottom:12px}.mb-4{margin-bottom:16px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.hidden{display:none !important}
+.full{width:100%}.min-vh{min-height:100vh}
+
+/* ============ CARDS & BUTTONS ============ */
+.card{
+  background:rgba(28, 18, 13, 0.85);
+  border:1px solid rgba(249, 115, 22, 0.3);
+  border-radius:18px;
+  padding:16px;
+  box-shadow:0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  backdrop-filter:blur(10px);
+}
+.card-strong{
+  background:rgba(36, 21, 14, 0.95);
+  border:1px solid rgba(239, 68, 68, 0.4);
+  border-radius:20px;
+  padding:22px;
+  box-shadow:0 0 25px rgba(249, 115, 22, 0.25);
+}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  gap:8px;padding:12px 18px;border-radius:12px;
+  font-weight:700;font-size:15px;transition:all .2s ease;
+}
+.btn:active{transform:scale(.95)}
+.btn-primary{background:linear-gradient(135deg,#ea580c,#dc2626);color:#fff;box-shadow:0 4px 15px rgba(234,88,12,0.4)}
+.btn-gold{background:linear-gradient(135deg,#f59e0b,#ef4444);color:#fff;font-weight:900;box-shadow:0 4px 15px rgba(245,158,11,0.3)}
+.btn-agent{background:linear-gradient(135deg,#0ea5e9,#3b82f6);color:#fff;font-weight:900;box-shadow:0 4px 15px rgba(14,165,233,0.3)}
+.btn-ghost{background:rgba(255,255,255,0.05);border:1px solid rgba(249,115,22,0.3);color:#fdba74}
+.btn-danger{background:rgba(220,38,38,0.2);border:1px solid rgba(220,38,38,0.4);color:#fca5a5}
+.btn-lg{padding:15px 22px;font-size:17px}
+.btn-sm{padding:8px 12px;font-size:12px}
+
+/* ============ HEADER & TABS ============ */
+.logo{
+  width:110px;height:110px;border-radius:50%;
+  background:linear-gradient(135deg,#f97316,#ef4444);
+  margin:0 auto 20px;display:flex;align-items:center;justify-content:center;
+  font-size:50px;box-shadow:0 0 35px rgba(249,115,22,0.6);
+  border:2px solid rgba(255,255,255,0.3);
+}
+.header{
+  position:sticky;top:0;z-index:20;
+  background:rgba(13, 8, 6, 0.95);
+  border-bottom:1px solid rgba(249,115,22,0.25);
+  padding:12px 0;backdrop-filter:blur(12px);
+}
+.avatar{
+  width:40px;height:40px;border-radius:12px;
+  background:linear-gradient(135deg,#f97316,#dc2626);
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:900;box-shadow:0 0 10px rgba(249,115,22,0.5);
+}
+.badge{
+  padding:2px 8px;border-radius:999px;font-size:10px;font-weight:900;
+  background:#f59e0b;color:#000;margin-right:4px;
+}
+.badge-agent{background:#0ea5e9;color:#fff;}
+
+.tabs{display:flex;gap:6px;background:rgba(255,255,255,0.03);padding:5px;border-radius:14px;margin-top:10px;border:1px solid rgba(249,115,22,0.2);overflow-x:auto}
+.tab{flex:1;padding:8px 12px;border-radius:10px;color:#fdba74;font-weight:700;font-size:12px;text-align:center;white-space:nowrap}
+.tab.active{background:linear-gradient(135deg,#ea580c,#dc2626);color:#fff;box-shadow:0 0 15px rgba(234,88,12,0.4)}
+
+.field{
+  width:100%;padding:12px;border-radius:12px;background:rgba(20,12,8,0.8);
+  color:#fff;border:1.5px solid rgba(249,115,22,0.3);font-size:15px;outline:none;margin-bottom:12px;
+}
+.field:focus{border-color:#ef4444;box-shadow:0 0 10px rgba(239,68,68,0.3)}
+.label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#fb923c}
+
+.moods{display:flex;gap:8px;flex-wrap:wrap}
+.mood{padding:8px 14px;border-radius:20px;background:rgba(255,255,255,0.05);border:1px solid rgba(249,115,22,0.3);font-weight:700;font-size:13px;color:#fdba74}
+.mood.active{background:linear-gradient(135deg,#f97316,#ef4444);color:#fff}
+
+.pill{display:inline-block;padding:4px 10px;border-radius:999px;background:rgba(249,115,22,0.2);color:#fb923c;font-size:11px;font-weight:700;border:1px solid rgba(239,68,68,0.3)}
+.pantry-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;background:rgba(249,115,22,0.15);border:1px solid rgba(249,115,22,0.4);font-size:12px;color:#fdba74;cursor:pointer;margin:4px}
+.pantry-chip.selected{background:linear-gradient(135deg,#f97316,#ef4444);color:#fff;border-color:#fff}
+
+/* ============ IMAGES & TIMER ============ */
+.recipe-img{width:100%;aspect-ratio:4/3;border-radius:16px;object-fit:cover;border:1px solid rgba(249,115,22,0.4);margin-top:12px;box-shadow:0 0 20px rgba(249,115,22,0.3)}
+.img-loading{width:100%;aspect-ratio:4/3;border-radius:16px;background:rgba(249,115,22,0.1);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;margin-top:12px;border:1px dashed rgba(249,115,22,0.4)}
+.loader{width:32px;height:32px;border:3px solid rgba(249,115,22,0.2);border-top-color:#ef4444;border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.servings-control{display:inline-flex;align-items:center;gap:10px;background:rgba(249,115,22,0.15);padding:4px 12px;border-radius:99px;border:1px solid rgba(249,115,22,0.3)}
+.btn-qty{width:26px;height:26px;border-radius:50%;background:#f97316;color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center}
+.timer-display{font-size:32px;font-weight:900;color:#f97316;font-family:monospace;letter-spacing:2px;text-shadow:0 0 10px rgba(249,115,22,0.5)}
+
+/* ============ MODALS & TOAST ============ */
+.modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:16px}
+.modal.show{display:flex !important}
+.modal-box{width:100%;max-width:500px;background:#180d08;border:1px solid rgba(249,115,22,0.4);border-radius:20px;padding:22px;max-height:85vh;overflow-y:auto;box-shadow:0 0 30px rgba(249,115,22,0.3)}
+
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#ea580c,#dc2626);color:#fff;padding:12px 20px;border-radius:12px;font-weight:700;z-index:999;display:none;box-shadow:0 0 20px rgba(249,115,22,0.5)}
+.toast.show{display:block}
+
+.ing-item{padding:10px 0;border-bottom:1px dashed rgba(249,115,22,0.2);display:flex;gap:10px;align-items:center}
+.step-item{padding:12px;border-radius:10px;background:rgba(255,255,255,0.03);margin-bottom:8px;display:flex;gap:10px;align-items:center;cursor:pointer;border:1px solid rgba(249,115,22,0.2);transition:all .2s}
+.step-item.done-step{background:rgba(34,197,94,0.15);text-decoration:line-through;opacity:0.7;border-color:rgba(34,197,94,0.4)}
+.step-num{width:26px;height:26px;border-radius:50%;background:#f97316;color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:900}
+
+.shop-item{display:flex;align-items:center;gap:10px;padding:10px;border-bottom:1px solid rgba(249,115,22,0.1);cursor:pointer}
+.shop-item.done{text-decoration:line-through;opacity:0.5}
+
+.rating-stars{display:flex;gap:4px;font-size:20px;cursor:pointer;color:#7c2d12}
+.rating-stars .star.active{color:#f59e0b;text-shadow:0 0 8px rgba(245,158,11,0.6)}
+
+.tip-box{background:rgba(245,158,11,0.1);border-right:4px solid #f59e0b;padding:10px;border-radius:8px;font-size:12px;margin-top:10px;color:#fde68a}
+.certified-banner{background:rgba(14,165,233,0.15);border:1px solid #0ea5e9;padding:10px 14px;border-radius:12px;color:#38bdf8;font-weight:bold;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+</style>
+</head>
+<body>
+
+<!-- 1. SPLASH -->
+<section id="splash" class="screen active">
+  <div class="min-vh flex flex-col items-center justify-center container">
+    <div class="logo">🔥</div>
+    <h1 class="neon-text center mb-2" style="font-size:30px">عالم الحلويات الناري</h1>
+    <p class="bold center mb-4" style="color:#fb923c">Cyber Flame Recipe Realm ⚔️</p>
+    <div class="card mb-4" style="max-width:400px">
+      <p class="center text-sm" style="line-height:1.7">
+        أهلاً بك في مقَر الطاقة لطهي الحلويات اللانهائية! استدعِ آلاف الوصفات المبتكرة مع صندوق المؤونة ونظام الوكيل.
+      </p>
+    </div>
+    <button onclick="goToScreen('login')" class="btn btn-primary btn-lg full" style="max-width:300px">🔥 إطلاق الطاقة / تسجيل الدخول</button>
+  </div>
+</section>
+
+<!-- 2. LOGIN -->
+<section id="login" class="screen">
+  <div class="min-vh flex flex-col items-center justify-center container">
+    <div class="card-strong full" style="max-width:400px">
+      <h2 class="center neon-text mb-3">بوابة الدخول</h2>
+      
+      <label class="label">📜 اسم المحارب / الطاهي</label>
+      <input id="chefName" type="text" placeholder="مثال: ريان" class="field" />
+
+      <label class="label">🔑 رمز الطاقة (كلمة السر)</label>
+      <input id="chefCode" type="password" placeholder="••••••••" class="field" />
+
+      <button onclick="handleLogin()" class="btn btn-primary full mt-2">⚡ دخول الحلبة</button>
+      <button onclick="openAgentLoginModal()" class="btn btn-agent full mt-2">🛡️ دخول كـ وكيل معتمد</button>
+    </div>
+  </div>
+</section>
+
+<!-- 2b. PENDING SCREEN -->
+<section id="pending" class="screen">
+  <div class="min-vh flex flex-col items-center justify-center container">
+    <div class="card-strong full center" style="max-width:400px">
+      <div style="font-size:50px" class="mb-2">⏳</div>
+      <h2 class="bold mb-2" style="color:#f59e0b">طلبك قيد المراجعة الإمبراطورية</h2>
+      <p class="text-sm text-muted mb-4">تم تسجيل طاقاتك بنجاح! ينتظر الحساب موافقة الوكيل أو قائد القلعة.</p>
+      <button onclick="checkApproval()" class="btn btn-gold full mb-2">🔄 فحص حالة الموافقة</button>
+      <button onclick="logout()" class="btn btn-ghost full">تراجع للخلف</button>
+    </div>
+  </div>
+</section>
+
+<!-- 3. DASHBOARD -->
+<section id="dashboard" class="screen">
+  <header class="header">
+    <div class="container flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <div class="avatar" id="headerAvatar">🔥</div>
+        <div>
+          <div class="text-tiny text-muted" id="headerRoleTitle">مرحباً بك يا قائد</div>
+          <div class="bold text-sm">
+            <span id="userGreet" style="color:#fb923c">—</span>
+            <span id="adminBadge" class="badge hidden">👑 الماستر</span>
+            <span id="agentBadge" class="badge badge-agent hidden">🛡️ وكيل معتمد</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex gap-2">
+        <button id="btnAdminPortal" onclick="openAdminPortal()" class="btn btn-ghost btn-sm hidden">👑 القلعة</button>
+        <button id="btnAgentPortal" onclick="openAgentPortal()" class="btn btn-agent btn-sm hidden">🛡️ لوحة الوكيل</button>
+        <button onclick="logout()" class="btn btn-ghost btn-sm">🚪 انسحاب</button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="tabs">
+        <button onclick="switchTab('lab')" id="tabBtnLab" class="tab active">🔮 المختبر</button>
+        <button onclick="switchTab('pantry')" id="tabBtnPantry" class="tab">🧊 صندوق المؤونة</button>
+        <button onclick="switchTab('shopping')" id="tabBtnShop" class="tab">🎒 العتاد</button>
+        <button onclick="switchTab('archive')" id="tabBtnArc" class="tab">📜 المخطوطات</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container mt-4">
+    <!-- تبويب المختبر وتوليد الوصفات -->
+    <div id="tab-lab">
+      <div class="card mb-3">
+        <h4 class="bold mb-3" style="color:#fb923c">🍯 أدخل المكونات المتاحة لديك:</h4>
+        
+        <input id="ingredients" type="text" placeholder="مثال: موز، قشطة، بسكويت، حليب، كاكاو..." class="field" />
+
+        <div class="mb-3">
+          <span class="text-xs text-muted">💡 أو اختر سريعاً من صندوق مؤونتك الدائم:</span>
+          <div id="pantryQuickSelect" class="mt-2" style="max-height:90px; overflow-y:auto"></div>
+        </div>
+
+        <label class="label">🍭 تصنيف الحلوى المستهدفة</label>
+        <div class="moods mb-3">
+          <button onclick="selectMood(this, 'الكل')" class="mood active">ابتكار حر</button>
+          <button onclick="selectMood(this, 'شرقي')" class="mood">🍮 شرقي فخم</button>
+          <button onclick="selectMood(this, 'غربي')" class="mood">🍰 غربي مبتكر</button>
+          <button onclick="selectMood(this, 'سريع')" class="mood">⚡ خاطف ولذيذ</button>
+        </div>
+
+        <button onclick="generateInfiniteRecipe()" class="btn btn-primary full btn-lg mt-2">✨ توليد وصفة جديدة كلياً بالذكاء الاصطناعي</button>
+      </div>
+
+      <!-- عارض الوصفة -->
+      <div id="recipeBox" class="card hidden">
+        <div id="certifiedBanner" class="certified-banner hidden">
+          🛡️ هذه الوصفة معتمدة رسمياً ومصادق عليها من الوكيل المعتمد لعالم الحلويات.
+        </div>
+
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <span id="rCategory" class="pill mb-1">🍰 غربي</span>
+            <span id="rCalories" class="pill" style="background:rgba(239,68,68,0.2);color:#ef4444">🔥 380 طاقة</span>
+            <h2 id="rName" class="neon-text mt-1">—</h2>
+          </div>
+          <div id="rEmoji" style="font-size:40px">🍰</div>
+        </div>
+
+        <p id="rTagline" class="text-sm text-muted mb-3">—</p>
+
+        <!-- تقييم الوصفة -->
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-xs bold" style="color:#fb923c">تقييم المهارة:</span>
+          <div class="rating-stars" id="recipeRating">
+            <span onclick="setRating(1)" class="star">★</span>
+            <span onclick="setRating(2)" class="star">★</span>
+            <span onclick="setRating(3)" class="star">★</span>
+            <span onclick="setRating(4)" class="star">★</span>
+            <span onclick="setRating(5)" class="star">★</span>
+          </div>
+        </div>
+
+        <!-- تعديل الحصص -->
+        <div class="card mb-3 flex justify-between items-center" style="background:rgba(255,255,255,0.02)">
+          <div class="text-sm bold" style="color:#fb923c">👥 عدد محاربي الحفلة (الحصص):</div>
+          <div class="servings-control">
+            <button onclick="updateServings(-1)" class="btn-qty">-</button>
+            <span id="servingsVal" class="bold text-sm">4</span>
+            <button onclick="updateServings(1)" class="btn-qty">+</button>
+          </div>
+        </div>
+
+        <h4 class="bold mb-2" style="color:#fb923c">🥄 المكونات الدقيقة للتعويذة:</h4>
+        <ul id="rIngredients" class="text-sm mb-3" style="list-style:none"></ul>
+
+        <button onclick="sendToShoppingList()" class="btn btn-ghost btn-sm full mb-3">🎒 إضافة المكونات لحقيبة العتاد</button>
+
+        <h4 class="bold mb-2" style="color:#fb923c">📝 خطوات الإنجاز:</h4>
+        <div id="rSteps" class="text-sm mb-3"></div>
+
+        <div id="rTipBox" class="tip-box mb-4">
+          💡 <b>حكمة المعلم:</b> <span id="rTipText">التجربة والابتكار هما سر تميز صانع الحلويات العظيم.</span>
+        </div>
+
+        <!-- زر اعتماد الوكيل المعتمد -->
+        <button id="btnCertify" onclick="toggleRecipeCertification()" class="btn btn-agent full mb-3 hidden">🛡️ ختم واعتماد الوصفة رسمياً</button>
+
+        <button onclick="openCookMode()" class="btn btn-gold full mb-4">🔥 وضع التركيز الأقصى (Focus Mode)</button>
+
+        <!-- توليد صورة بالذكاء الاصطناعي -->
+        <div class="card mb-4" style="background:rgba(255,255,255,0.02)">
+          <h4 class="bold text-sm mb-2" style="color:#fb923c">📸 صورة واقعية للوصفة (Real Food Photo)</h4>
+          <button id="btnGenImg" onclick="generateAiImage()" class="btn btn-gold full">🌌 استدعاء صورة حقيقية واحترافية للطبق</button>
+          
+          <div id="rImageLoading" class="img-loading hidden">
+            <div class="loader"></div>
+            <div class="text-sm bold" style="color:#fb923c">جاري التقاط واستدعاء الصورة الواقعية...</div>
+          </div>
+          <img id="rImage" class="recipe-img hidden" alt="صورة الحلوى الواقعية" />
+        </div>
+
+        <!-- مؤقت المطبخ -->
+        <div class="card mb-4 center" style="background:rgba(255,255,255,0.02)">
+          <h4 class="bold text-sm mb-2" style="color:#fb923c">⏱️ عداد التحول والطهي</h4>
+          <div id="timerDisplay" class="timer-display mb-2">20:00</div>
+          <div class="flex justify-center gap-2">
+            <button id="btnStartTimer" onclick="startTimer()" class="btn btn-gold btn-sm">▶️ بدأ العداد</button>
+            <button onclick="resetTimer()" class="btn btn-ghost btn-sm">🔄 إعادة الضبط</button>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <button onclick="saveRecipe()" class="btn btn-ghost btn-sm">📜 حفظ المخطوطة</button>
+          <button onclick="copyRecipe()" class="btn btn-ghost btn-sm">📋 نسخ</button>
+          <button onclick="window.print()" class="btn btn-ghost btn-sm">🖨️ طباعة</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- تبويب صندوق المؤونة الذكية -->
+    <div id="tab-pantry" class="hidden">
+      <div class="card mb-3">
+        <h3 class="bold neon-text mb-2">🧊 صندوق المؤونة والثلاجة الذكية</h3>
+        <p class="text-sm text-muted mb-3">سجل مكوناتك المتوفرة دائماً لديك لدمجها بلمسة واحدة في المختبر دون إعادة كتابتها.</p>
+        
+        <div class="flex gap-2 mb-3">
+          <input id="newPantryItem" type="text" placeholder="أضف مكوناً جديداً (مثال: حليب مكثف)" class="field" style="margin-bottom:0" />
+          <button onclick="addPantryItem()" class="btn btn-primary" style="white-space:nowrap">➕ إضافة</button>
+        </div>
+
+        <div id="pantryItemsContainer" class="mt-3">
+          <p class="text-sm text-muted">صندوق المؤونة فارغ حالياً.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- تبويب المشتريات -->
+    <div id="tab-shopping" class="hidden">
+      <div class="card">
+        <div class="flex justify-between items-center mb-3">
+          <h3 class="bold neon-text">🎒 حقيبة العتاد والتسوق</h3>
+          <button onclick="clearShoppingList()" class="btn btn-danger btn-sm">تفريغ الحقيبة</button>
+        </div>
+        <div id="shoppingList" class="text-sm">حقيبة العتاد فارغة حالياً.</div>
+      </div>
+    </div>
+
+    <!-- تبويب الأرشيف -->
+    <div id="tab-archive" class="hidden">
+      <div id="archiveEmpty" class="card center">
+        <div style="font-size:40px">📜</div>
+        <p class="bold mt-2" style="color:#fb923c">لا توجد مخطوطات محفوظة حتى الآن</p>
+      </div>
+      <div id="archiveList"></div>
+    </div>
+  </main>
+</section>
+
+<!-- نافذة دخول الوكيل المعتمد -->
+<div id="agentLoginModal" class="modal">
+  <div class="modal-box">
+    <h3 class="bold mb-2 neon-text" style="color:#0ea5e9">🛡️ بوابة الوكيل المعتمد</h3>
+    <p class="text-sm text-muted mb-3">أدخل رمز ترخيص الوكيل المعتمد</p>
+    <input id="agentNameInput" type="text" placeholder="اسم الوكيل (مثال: ريان - وكيل معتمد)" class="field mb-2" />
+    <input id="agentPassInput" type="password" placeholder="••••••••" class="field mb-3" />
+    <div class="grid-2">
+      <button onclick="toggleModal('agentLoginModal', false)" class="btn btn-ghost">تراجع</button>
+      <button onclick="verifyAgent()" class="btn btn-agent">🛡️ اعتماد الدخول</button>
+    </div>
+  </div>
+</div>
+
+<!-- لوحة الوكيل المعتمد -->
+<div id="agentPanelModal" class="modal">
+  <div class="modal-box">
+    <div class="flex justify-between items-center mb-3">
+      <h3 class="neon-text" style="color:#0ea5e9">🛡️ لوحة تحكم الوكيل المعتمد</h3>
+      <button onclick="toggleModal('agentPanelModal', false)" class="btn btn-ghost btn-sm">✕ إغلاق</button>
+    </div>
+
+    <div class="card mb-3" style="background:rgba(255,255,255,0.02)">
+      <h4 class="bold text-sm mb-2" style="color:#38bdf8">👥 طلبات تسجيل الدخول المعلقة</h4>
+      <div id="pendingUsersListAgent" class="text-sm text-muted">لا توجد طلبات معلقة</div>
+    </div>
+
+    <button onclick="toggleModal('agentPanelModal', false)" class="btn btn-agent full">إغلاق اللوحة</button>
+  </div>
+</div>
+
+<!-- نافذة دخول المشرف -->
+<div id="adminLoginModal" class="modal">
+  <div class="modal-box">
+    <h3 class="bold mb-2 neon-text">👑 بوابة القلعة الإمبراطورية</h3>
+    <p class="text-sm text-muted mb-3">أدخل رمز التحكم للماستر</p>
+    <input id="adminPass" type="password" placeholder="••••••••" class="field mb-3" />
+    <div class="grid-2">
+      <button onclick="toggleModal('adminLoginModal', false)" class="btn btn-ghost">تراجع</button>
+      <button onclick="verifyAdmin()" class="btn btn-gold">🔓 فتح القلعة</button>
+    </div>
+  </div>
+</div>
+
+<!-- لوحة المشرف الإدارية -->
+<div id="adminPanelModal" class="modal">
+  <div class="modal-box">
+    <div class="flex justify-between items-center mb-3">
+      <h3 class="neon-text">لوحة الماستر الأسطورية</h3>
+      <button onclick="toggleModal('adminPanelModal', false)" class="btn btn-ghost btn-sm">✕ إغلاق</button>
+    </div>
+
+    <div class="card mb-3" style="background:rgba(255,255,255,0.02)">
+      <h4 class="bold text-sm mb-2" style="color:#f59e0b">👥 طلبات تسجيل الدخول المعلقة</h4>
+      <div id="pendingUsersList" class="text-sm text-muted">لا توجد طلبات معلقة</div>
+    </div>
+
+    <div class="card mb-3" style="background:rgba(255,255,255,0.02)">
+      <h4 class="bold text-sm mb-2" style="color:#f59e0b">⚙️ صلاحيات العالم</h4>
+      <label class="flex justify-between items-center mb-2 text-sm">
+        <span>السماح للمستخدمين بتوليد الصور الـ AI</span>
+        <input type="checkbox" id="cfgImgUsers" onchange="saveAdminSettings()" />
+      </label>
+      <label class="flex justify-between items-center mb-2 text-sm">
+        <span>طلب موافقة الماستر أو الوكيل عند الدخول</span>
+        <input type="checkbox" id="cfgRequireApp" onchange="saveAdminSettings()" />
+      </label>
+    </div>
+
+    <button onclick="adminLogout()" class="btn btn-danger full">🚪 المغادرة</button>
+  </div>
+</div>
+
+<!-- نافذة وضع الطهي التركيزي -->
+<div id="cookModeModal" class="modal">
+  <div class="modal-box" style="max-width:600px">
+    <div class="flex justify-between items-center mb-3">
+      <h3 id="cookTitle" class="neon-text">🔥 وضع التركيز الأقصى</h3>
+      <button onclick="toggleModal('cookModeModal', false)" class="btn btn-ghost btn-sm">✕ إغلاق</button>
+    </div>
+    <div id="cookStepBox" class="card center mb-4" style="background:rgba(255,255,255,0.03)">
+      <div id="cookStepNum" class="badge mb-2" style="font-size:14px;background:#ea580c;color:#fff">المرحلة 1</div>
+      <p id="cookStepText" class="bold" style="font-size:18px;line-height:1.6;color:#fff">—</p>
+    </div>
+    <div class="grid-2">
+      <button onclick="prevStep()" class="btn btn-ghost">← المرحلة السابقة</button>
+      <button onclick="nextStep()" class="btn btn-gold">المرحلة التالية →</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast">✨ تم التنفيذ بنجاح!</div>
+
+<script>
+const OWNER_PASS = "123456";
+const AGENT_PASS = "789012";
+
+let state = {
+  user: safeGetStorage('pro_ck_user', null),
+  favorites: safeGetStorage('pro_ck_favs', []),
+  shopping: safeGetStorage('pro_ck_shop', []),
+  users: safeGetStorage('pro_ck_users', []),
+  pantry: safeGetStorage('pro_ck_pantry', ["حليب", "سكر", "دقيق", "شوكولاتة", "زبدة", "موز", "بيض"]),
+  ratings: safeGetStorage('pro_ck_ratings', {}),
+  certifications: safeGetStorage('pro_ck_certs', {}),
+  settings: safeGetStorage('pro_ck_cfg', { imgUsers: true, requireApp: true }),
+  isAdmin: false,
+  isAgent: false,
+  currentMood: "الكل",
+  currentRecipe: null,
+  servings: 4,
+  completedSteps: [],
+  currentCookStep: 0,
+  timerInterval: null,
+  timerSeconds: 1200
+};
+
+function safeGetStorage(key, fallback) {
+  try {
+    const item = localStorage.getItem(key);
+    return item ? JSON.parse(item) : fallback;
+  } catch (e) {
+    return fallback;
+  }
+}
+
+function safeSetStorage(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {}
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (state.user) {
+    if (state.user.status === 'pending') goToScreen('pending');
+    else enterDashboard();
+  } else {
+    goToScreen('splash');
+  }
+});
+
+function goToScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById(id);
+  if (target) target.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function toggleModal(id, show) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('show', !!show);
+}
+
+function switchTab(tab) {
+  document.getElementById('tab-lab').classList.toggle('hidden', tab !== 'lab');
+  document.getElementById('tab-pantry').classList.toggle('hidden', tab !== 'pantry');
+  document.getElementById('tab-shopping').classList.toggle('hidden', tab !== 'shopping');
+  document.getElementById('tab-archive').classList.toggle('hidden', tab !== 'archive');
+  
+  document.getElementById('tabBtnLab').classList.toggle('active', tab === 'lab');
+  document.getElementById('tabBtnPantry').classList.toggle('active', tab === 'pantry');
+  document.getElementById('tabBtnShop').classList.toggle('active', tab === 'shopping');
+  document.getElementById('tabBtnArc').classList.toggle('active', tab === 'archive');
+
+  if (tab === 'archive') renderArchive();
+  if (tab === 'shopping') renderShoppingList();
+  if (tab === 'pantry') renderPantryList();
+  if (tab === 'lab') renderPantryQuickSelect();
+}
+
+/* ============ PANTRY (SMART FRIDGE) LOGIC ============ */
+function renderPantryList() {
+  const container = document.getElementById('pantryItemsContainer');
+  if (!state.pantry.length) {
+    container.innerHTML = '<p class="text-sm text-muted">صندوق المؤونة فارغ حالياً.</p>';
+    return;
+  }
+  container.innerHTML = state.pantry.map((item, idx) => `
+    <div class="flex justify-between items-center mb-2" style="background:rgba(255,255,255,0.03); padding:8px 12px; border-radius:10px; border:1px solid rgba(249,115,22,0.2)">
+      <span class="bold text-sm" style="color:#fdba74">🧊 ${item}</span>
+      <button onclick="removePantryItem(${idx})" class="btn btn-danger btn-sm">حذف</button>
+    </div>
+  `).join('');
+}
+
+function addPantryItem() {
+  const input = document.getElementById('newPantryItem');
+  const val = input.value.trim();
+  if (!val) return;
+  if (!state.pantry.includes(val)) {
+    state.pantry.push(val);
+    saveData();
+    input.value = '';
+    renderPantryList();
+    showToast('🧊 تمت إضافة المكون للمؤونة');
+  } else {
+    showToast('⚠️ المكون موجود مسبقاً');
+  }
+}
+
+function removePantryItem(idx) {
+  state.pantry.splice(idx, 1);
+  saveData();
+  renderPantryList();
+  showToast('🗑️ تمت الإزالة من المؤونة');
+}
+
+function renderPantryQuickSelect() {
+  const container = document.getElementById('pantryQuickSelect');
+  if (!state.pantry.length) {
+    container.innerHTML = '<span class="text-tiny text-muted">لا توجد مكونات محفوظة بالمؤونة.</span>';
+    return;
+  }
+  container.innerHTML = state.pantry.map(item => `
+    <span class="pantry-chip" onclick="appendPantryToInput('${item}')">➕ ${item}</span>
+  `).join('');
+}
+
+function appendPantryToInput(item) {
+  const input = document.getElementById('ingredients');
+  if (input.value.trim() === '') {
+    input.value = item;
+  } else {
+    input.value += '، ' + item;
+  }
+  showToast(`✨ تمت إضافة (${item}) لمكونات الوصفة`);
+}
+
+/* ============ AUTHENTICATION ============ */
+function handleLogin() {
+  const name = document.getElementById('chefName').value.trim();
+  const code = document.getElementById('chefCode').value.trim();
+
+  if (!name) { showToast('⚠️ ادخل اسم المحارب أولاً'); return; }
+
+  state.users = safeGetStorage('pro_ck_users', []);
+
+  if (code === OWNER_PASS) {
+    state.user = { id: 1, name: name, status: 'approved', role: 'admin' };
+    state.isAdmin = true;
+    state.isAgent = false;
+    saveData();
+    enterDashboard();
+    showToast('👑 أهلاً بك يا ماستر القلعة!');
+    return;
+  }
+
+  let existing = state.users.find(u => u.name.toLowerCase() === name.toLowerCase());
+  
+  if (existing) {
+    state.user = existing;
+    state.isAdmin = (existing.role === 'admin');
+    state.isAgent = (existing.role === 'agent');
+    saveData();
+    if (existing.status === 'pending') goToScreen('pending');
+    else enterDashboard();
+  } else {
+    const newUser = { 
+      id: Date.now(), 
+      name: name, 
+      role: 'user',
+      status: state.settings.requireApp ? 'pending' : 'approved' 
+    };
+    
+    state.users.push(newUser);
+    state.user = newUser;
+    saveData();
+
+    if (state.settings.requireApp) {
+      goToScreen('pending');
+      showToast('⏳ تم إرسال طلبك للوكيل والماستر بنجاح');
+    } else {
+      enterDashboard();
+    }
+  }
+}
+
+function openAgentLoginModal() {
+  document.getElementById('agentNameInput').value = '';
+  document.getElementById('agentPassInput').value = '';
+  toggleModal('agentLoginModal', true);
+}
+
+function verifyAgent() {
+  const name = document.getElementById('agentNameInput').value.trim() || "الوكيل المعتمد";
+  const pass = document.getElementById('agentPassInput').value;
+
+  if (pass === AGENT_PASS) {
+    state.user = { id: Date.now(), name: name, status: 'approved', role: 'agent' };
+    state.isAgent = true;
+    state.isAdmin = false;
+    saveData();
+    toggleModal('agentLoginModal', false);
+    enterDashboard();
+    showToast('🛡️ تم دخول الوكيل المعتمد بنجاح!');
+  } else {
+    showToast('❌ رمز الوكيل غير صحيح');
+  }
+}
+
+function checkApproval() {
+  state.users = safeGetStorage('pro_ck_users', []);
+  const curr = state.users.find(u => u.id === state.user.id);
+  if (curr && curr.status === 'approved') {
+    state.user = curr;
+    saveData();
+    enterDashboard();
+    showToast('✅ تمت الموافقة بنجاح!');
+  } else {
+    showToast('⏳ الطلب لا زال تحت المراجعة');
+  }
+}
+
+function enterDashboard() {
+  document.getElementById('userGreet').textContent = state.user ? state.user.name : 'محارب';
+  
+  if (state.user && state.user.role === 'admin') state.isAdmin = true;
+  if (state.user && state.user.role === 'agent') state.isAgent = true;
+
+  if (state.isAdmin) {
+    document.getElementById('adminBadge').classList.remove('hidden');
+    document.getElementById('btnAdminPortal').classList.remove('hidden');
+    document.getElementById('btnAgentPortal').classList.add('hidden');
+    document.getElementById('headerAvatar').textContent = '👑';
+    document.getElementById('headerRoleTitle').textContent = 'ماستر القلعة';
+  } else if (state.isAgent) {
+    document.getElementById('agentBadge').classList.remove('hidden');
+    document.getElementById('btnAgentPortal').classList.remove('hidden');
+    document.getElementById('btnAdminPortal').classList.add('hidden');
+    document.getElementById('headerAvatar').textContent = '🛡️';
+    document.getElementById('headerRoleTitle').textContent = 'وكيل معتمد رسمي';
+  } else {
+    document.getElementById('adminBadge').classList.add('hidden');
+    document.getElementById('agentBadge').classList.add('hidden');
+    document.getElementById('btnAdminPortal').classList.add('hidden');
+    document.getElementById('btnAgentPortal').classList.add('hidden');
+    document.getElementById('headerAvatar').textContent = '🔥';
+    document.getElementById('headerRoleTitle').textContent = 'طاهي ومحارب';
+  }
+
+  goToScreen('dashboard');
+  renderPantryQuickSelect();
+}
+
+function logout() {
+  state.user = null;
+  state.isAdmin = false;
+  state.isAgent = false;
+  saveData();
+  goToScreen('login');
+}
+
+/* ============ ADMIN PANEL ============ */
+function openAdminPortal() {
+  renderAdminPanel();
+  toggleModal('adminPanelModal', true);
+}
+
+function renderAdminPanel() {
+  state.users = safeGetStorage('pro_ck_users', []);
+  document.getElementById('cfgImgUsers').checked = state.settings.imgUsers;
+  document.getElementById('cfgRequireApp').checked = state.settings.requireApp;
+
+  const pending = state.users.filter(u => u.status === 'pending');
+  const listEl = document.getElementById('pendingUsersList');
+
+  if (!pending.length) {
+    listEl.innerHTML = '<p class="text-sm text-muted">لا توجد طلبات تسجيل معلقة حالياً</p>';
+  } else {
+    listEl.innerHTML = pending.map(u => `
+      <div class="flex justify-between items-center mb-2" style="border-bottom:1px dashed rgba(249,115,22,0.2);padding:8px 0">
+        <div><b>${u.name}</b></div>
+        <div class="flex gap-2">
+          <button onclick="approveUser(${u.id}); renderAdminPanel();" class="btn btn-gold btn-sm">قبول</button>
+          <button onclick="rejectUser(${u.id}); renderAdminPanel();" class="btn btn-danger btn-sm">رفض</button>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+/* ============ AGENT PANEL ============ */
+function openAgentPortal() {
+  renderAgentPanel();
+  toggleModal('agentPanelModal', true);
+}
+
+function renderAgentPanel() {
+  state.users = safeGetStorage('pro_ck_users', []);
+  const pending = state.users.filter(u => u.status === 'pending');
+  const listEl = document.getElementById('pendingUsersListAgent');
+
+  if (!pending.length) {
+    listEl.innerHTML = '<p class="text-sm text-muted">لا توجد طلبات تسجيل معلقة حالياً</p>';
+  } else {
+    listEl.innerHTML = pending.map(u => `
+      <div class="flex justify-between items-center mb-2" style="border-bottom:1px dashed rgba(14,165,233,0.2);padding:8px 0">
+        <div><b>${u.name}</b></div>
+        <div class="flex gap-2">
+          <button onclick="approveUser(${u.id}); renderAgentPanel();" class="btn btn-agent btn-sm">قبول</button>
+          <button onclick="rejectUser(${u.id}); renderAgentPanel();" class="btn btn-danger btn-sm">رفض</button>
+        </div>
+      </div>
+    `).join('');
+  }
+}
+
+function approveUser(id) {
+  state.users = safeGetStorage('pro_ck_users', []);
+  const u = state.users.find(x => x.id === id);
+  if (u) { u.status = 'approved'; saveData(); showToast('✅ تم قبول المحارب!'); }
+}
+
+function rejectUser(id) {
+  state.users = safeGetStorage('pro_ck_users', []);
+  state.users = state.users.filter(x => x.id !== id);
+  saveData();
+  showToast('❌ تم رفض وحذف طلب المستخدم');
+}
+
+function saveAdminSettings() {
+  state.settings.imgUsers = document.getElementById('cfgImgUsers').checked;
+  state.settings.requireApp = document.getElementById('cfgRequireApp').checked;
+  saveData();
+  showToast('💾 تم حفظ الإعدادات');
+}
+
+function adminLogout() {
+  toggleModal('adminPanelModal', false);
+}
+
+/* ============ CERTIFICATION SYSTEM ============ */
+function toggleRecipeCertification() {
+  if (!state.isAgent && !state.isAdmin) return;
+  const r = state.currentRecipe;
+  if (!r) return;
+
+  const currentStatus = !!state.certifications[r.id];
+  state.certifications[r.id] = !currentStatus;
+  saveData();
+  renderRecipe(r);
+  showToast(state.certifications[r.id] ? '🛡️ تمت المصادقة واعتماد الوصفة رسمياً!' : '⚠️ تم إزالة الختم الرسمي');
+}
+
+/* ============ DYNAMIC INFINITE RECIPE GENERATOR ============ */
+function createInfiniteRecipe(rawInput, mood) {
+  const cleanInput = rawInput.trim() || "حليب وشوكولاتة وبسكويت";
+  const items = cleanInput.split(/[,،\s]+/).filter(Boolean);
+  const primaryItem = items[0] || "عنصر سحري";
+  const secondaryItem = items[1] || "مكون إضافي";
+
+  const adjectives = ["الملكي", "البركاني", "الفاخر", "المططور", "الغامض", "الساحر", "الذهبي", "المتوهج"];
+  const dessertTypes = mood === 'شرقي' ? ["كنافة", "بسبوسة", "ليالي الأبطال", "أم علي", "مهلبية"] :
+                       mood === 'سريع' ? ["كيكة الماكرويف السريعة", "بان كيك الطاقة", "حلى الطبقات السريع", "سموذي القوة"] :
+                       ["تارت", "مولتن كيك", "تشيز كيك", "موفن", "جراتان الحلوى"];
+
+  const randomAdj = adjectives[Math.floor(Math.random() * adjectives.length)];
+  const randomType = dessertTypes[Math.floor(Math.random() * dessertTypes.length)];
+  const recipeName = `${randomType} ${primaryItem} ${randomAdj}`;
+  
+  const englishRecipeName = `Delicious gourmet homemade ${primaryItem} and ${secondaryItem} dessert pastry, professional fine dining presentation, 8k, realistic food photography`;
+
+  const emojis = ["🍰", "🍮", "🧁", "🍫", "🍯", "🥞", "🍩", "✨"];
+  const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+
+  const category = mood === 'الكل' ? (Math.random() > 0.5 ? 'غربي' : 'شرقي') : mood;
+  const calories = Math.floor(Math.random() * 250) + 220;
+  const cookTime = Math.floor(Math.random() * 20) + 10;
+
+  let generatedIngredients = [
+    { name: primaryItem, amount: 2, unit: "كوب أو حصة" },
+    { name: secondaryItem, amount: 1, unit: "كوب" },
+    { name: "سكر أبيض نقي", amount: 3, unit: "ملعقة كبيرة" },
+    { name: "زبدة أو زيت نباتي", amount: 50, unit: "جرام" },
+    { name: "رشة فانيليا وملح", amount: 1, unit: "رشة" }
+  ];
+
+  if (items.length > 2) {
+    for (let i = 2; i < Math.min(items.length, 5); i++) {
+      generatedIngredients.push({ name: items[i], amount: 1, unit: "حصة مضافة" });
+    }
+  }
+
+  const generatedSteps = [
+    `جهّز وعاء الخلط الناري وضع فيه ${primaryItem} مع ${secondaryItem} وامزجهما جيداً بقوام متجانس.`,
+    `أضف السكر والزبدة المذابة بالتدريج مع الاستمرار في التقليب السريع لضمان تداخل النكهات.`,
+    `اسكب الخليط في قالب مدهون مسبقاً بالزبدة لضمان عدم التصاق طاقة الحلوى أثناء النضج.`,
+    `أدخل القالب إلى الفرن المحمى مسبقاً على حرارة 180 درجة مئوية واتركه لمدة ${cookTime} دقائق حتى تتحمر الحواف.`,
+    `أخرج التحفة من الفرن واتركها تبرد قليلاً قبل التزيين، ثم قدمها لمحاربي الحفلة بالهناء والشفاء!`
+  ];
+
+  const tips = [
+    `سر نجاح هذه الوصفة المبتكرة هو استخدام ${primaryItem} بدرجة حرارة الغرفة للحصول على قوام متماسك.`,
+    `يمكنك مضاعفة كمية ${secondaryItem} إذا رغبت بنكهة أغنى وأعمق.`,
+    `التحكم الدقيق بدرجة حرارة التسخين يمنحك القوام المقرمش من الخارج والناعم من الداخل.`
+  ];
+  const randomTip = tips[Math.floor(Math.random() * tips.length)];
+
+  return {
+    id: Date.now(),
+    name: recipeName,
+    englishName: englishRecipeName,
+    category: category,
+    emoji: randomEmoji,
+    tagline: `وصفة مبتكرة خصيصاً من تفكير وعناصر (${cleanInput}) لتمنحك طاقة لا نهائية.`,
+    calories: calories,
+    cookTimeMinutes: cookTime,
+    baseServings: 4,
+    tip: randomTip,
+    ingredients: generatedIngredients,
+    steps: generatedSteps
+  };
+}
+
+function selectMood(btn, mood) {
+  document.querySelectorAll('.mood').forEach(m => m.classList.remove('active'));
+  btn.classList.add('active');
+  state.currentMood = mood;
+}
+
+function generateInfiniteRecipe() {
+  const input = document.getElementById('ingredients').value.trim();
+  const newRecipe = createInfiniteRecipe(input, state.currentMood);
+
+  state.currentRecipe = newRecipe;
+  state.servings = newRecipe.baseServings;
+  state.completedSteps = [];
+  document.getElementById('servingsVal').textContent = state.servings;
+  state.timerSeconds = newRecipe.cookTimeMinutes * 60;
+  updateTimerDisplay();
+
+  renderRecipe(newRecipe);
+  showToast('✨ تم ابتكار وصفة جديدة كلياً في تفكير الذكاء الاصطناعي!');
+}
+
+function renderRecipe(r) {
+  document.getElementById('rName').textContent = r.name;
+  document.getElementById('rTagline').textContent = r.tagline;
+  document.getElementById('rCategory').textContent = '🏷️ ' + r.category;
+  document.getElementById('rEmoji').textContent = r.emoji;
+  document.getElementById('rCalories').textContent = '🔥 ' + r.calories + ' طاقة';
+  document.getElementById('rTipText').textContent = r.tip;
+
+  const isCertified = !!state.certifications[r.id];
+  const bannerEl = document.getElementById('certifiedBanner');
+  const btnCertify = document.getElementById('btnCertify');
+
+  if (isCertified) {
+    bannerEl.classList.remove('hidden');
+  } else {
+    bannerEl.classList.add('hidden');
+  }
+
+  if (state.isAgent || state.isAdmin) {
+    btnCertify.classList.remove('hidden');
+    btnCertify.textContent = isCertified ? '🛡️ إزالة الختم الرسمي' : '🛡️ ختم واعتماد الوصفة رسمياً';
+  } else {
+    btnCertify.classList.add('hidden');
+  }
+
+  const savedRating = state.ratings[r.id] || 0;
+  updateRatingStars(savedRating);
+
+  const ratio = state.servings / r.baseServings;
+  const ingsHtml = r.ingredients.map(i => {
+    const calcAmount = (i.amount * ratio).toFixed(1).replace('.0', '');
+    return `<li class="ing-item">🔥 <b>${calcAmount} ${i.unit}</b> — ${i.name}</li>`;
+  }).join('');
+  document.getElementById('rIngredients').innerHTML = ingsHtml;
+
+  renderStepsHtml();
+
+  document.getElementById('rImage').classList.add('hidden');
+  document.getElementById('rImageLoading').classList.add('hidden');
+  document.getElementById('recipeBox').classList.remove('hidden');
+  document.getElementById('recipeBox').scrollIntoView({ behavior: 'smooth' });
+}
+
+function renderStepsHtml() {
+  const r = state.currentRecipe;
+  if (!r) return;
+  document.getElementById('rSteps').innerHTML = r.steps.map((s,i) => {
+    const isDone = state.completedSteps.includes(i);
+    return `
+      <div class="step-item ${isDone ? 'done-step' : ''}" onclick="toggleStepDone(${i})">
+        <span class="step-num">${i+1}</span>
+        <span style="flex:1">${s}</span>
+        <span>${isDone ? '✅' : '⚪'}</span>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleStepDone(index) {
+  if (state.completedSteps.includes(index)) {
+    state.completedSteps = state.completedSteps.filter(i => i !== index);
+  } else {
+    state.completedSteps.push(index);
+  }
+  renderStepsHtml();
+}
+
+function setRating(stars) {
+  if (!state.currentRecipe) return;
+  state.ratings[state.currentRecipe.id] = stars;
+  saveData();
+  updateRatingStars(stars);
+  showToast(`⭐ تم تقييم المهارة بـ (${stars} نجوم)!`);
+}
+
+function updateRatingStars(rating) {
+  const starsEl = document.getElementById('recipeRating').children;
+  for (let i = 0; i < 5; i++) {
+    if (i < rating) starsEl[i].classList.add('active');
+    else starsEl[i].classList.remove('active');
+  }
+}
+
+function updateServings(delta) {
+  if (state.servings + delta < 1) return;
+  state.servings += delta;
+  document.getElementById('servingsVal').textContent = state.servings;
+  if (state.currentRecipe) renderRecipe(state.currentRecipe);
+}
+
+/* ============ IMAGE GENERATION ============ */
+function generateAiImage() {
+  if (!state.isAdmin && !state.settings.imgUsers) {
+    showToast('🔒 ميزة التوليد مقفلة من قبل الماستر');
+    return;
+  }
+  const r = state.currentRecipe;
+  if (!r) return;
+
+  const realFoodPrompt = `Professional high quality food photography of ${r.englishName || r.name}, delicious homemade dessert, close-up shot, cinematic lighting, 8k resolution, realistic texture`;
+  const query = encodeURIComponent(realFoodPrompt);
+  const timeStamp = new Date().getTime();
+  const url = `https://image.pollinations.ai/prompt/${query}?width=800&height=600&nologo=true&seed=${Math.floor(Math.random()*10000)}&t=${timeStamp}`;
+
+  const imgEl = document.getElementById('rImage');
+  const loaderEl = document.getElementById('rImageLoading');
+
+  loaderEl.classList.remove('hidden');
+  imgEl.classList.add('hidden');
+
+  imgEl.onload = function() {
+    loaderEl.classList.add('hidden');
+    imgEl.classList.remove('hidden');
+    showToast('✨ تجلت الصورة الحقيقية للوصفة بنجاح!');
+  };
+  
+  imgEl.onerror = function() {
+    loaderEl.classList.add('hidden');
+    showToast('❌ تعذر جلب الصورة، حاول مجدداً');
+  };
+
+  imgEl.src = url;
+}
+
+/* ============ TIMER & UTILS ============ */
+function startTimer() {
+  const btn = document.getElementById('btnStartTimer');
+  if (state.timerInterval) {
+    clearInterval(state.timerInterval);
+    state.timerInterval = null;
+    btn.textContent = '▶️ استئناف';
+    return;
+  }
+
+  btn.textContent = '⏸️ إيقاف مؤقت';
+  state.timerInterval = setInterval(() => {
+    if (state.timerSeconds <= 0) {
+      clearInterval(state.timerInterval);
+      state.timerInterval = null;
+      btn.textContent = '▶️ بدأ العداد';
+      showToast('🔔 انتهت فترة التحول والطهي!');
+      return;
+    }
+    state.timerSeconds--;
+    updateTimerDisplay();
+  }, 1000);
+}
+
+function resetTimer() {
+  if (state.timerInterval) clearInterval(state.timerInterval);
+  state.timerInterval = null;
+  state.timerSeconds = state.currentRecipe ? state.currentRecipe.cookTimeMinutes * 60 : 1200;
+  updateTimerDisplay();
+  document.getElementById('btnStartTimer').textContent = '▶️ بدأ العداد';
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(state.timerSeconds / 60).toString().padStart(2, '0');
+  const s = (state.timerSeconds % 60).toString().padStart(2, '0');
+  document.getElementById('timerDisplay').textContent = `${m}:${s}`;
+}
+
+function sendToShoppingList() {
+  if (!state.currentRecipe) return;
+  const ratio = state.servings / state.currentRecipe.baseServings;
+  state.currentRecipe.ingredients.forEach(i => {
+    const calcAmount = (i.amount * ratio).toFixed(1).replace('.0', '');
+    state.shopping.push({ id: Date.now() + Math.random(), text: `${calcAmount} ${i.unit} ${i.name}`, done: false });
+  });
+  saveData();
+  showToast('🎒 تمت إضافة العناصر لحقيبة العتاد');
+}
+
+function renderShoppingList() {
+  const el = document.getElementById('shoppingList');
+  if (!state.shopping.length) { el.innerHTML = 'حقيبة العتاد فارغة حالياً.'; return; }
+  el.innerHTML = state.shopping.map((item, idx) => `
+    <div class="shop-item ${item.done ? 'done' : ''}" onclick="toggleShopItem(${idx})">
+      <input type="checkbox" ${item.done ? 'checked' : ''} />
+      <span>${item.text}</span>
+    </div>
+  `).join('');
+}
+
+function toggleShopItem(idx) {
+  state.shopping[idx].done = !state.shopping[idx].done;
+  saveData();
+  renderShoppingList();
+}
+
+function clearShoppingList() {
+  state.shopping = [];
+  saveData();
+  renderShoppingList();
+}
+
+function openCookMode() {
+  if (!state.currentRecipe) return;
+  state.currentCookStep = 0;
+  document.getElementById('cookTitle').textContent = `🔥 ${state.currentRecipe.name}`;
+  updateCookStepDisplay();
+  toggleModal('cookModeModal', true);
+}
+
+function updateCookStepDisplay() {
+  const steps = state.currentRecipe.steps;
+  document.getElementById('cookStepNum').textContent = `المرحلة ${state.currentCookStep + 1} من ${steps.length}`;
+  document.getElementById('cookStepText').textContent = steps[state.currentCookStep];
+}
+
+function nextStep() {
+  if (state.currentCookStep < state.currentRecipe.steps.length - 1) {
+    state.currentCookStep++;
+    updateCookStepDisplay();
+  } else {
+    showToast('🎉 اكتملت التعويذة واكتملت الحلوى بنجاح!');
+  }
+}
+
+function prevStep() {
+  if (state.currentCookStep > 0) {
+    state.currentCookStep--;
+    updateCookStepDisplay();
+  }
+}
+
+function saveRecipe() {
+  if (!state.currentRecipe) return;
+  if (state.favorites.some(f => f.id === state.currentRecipe.id)) { showToast('المخطوطة محفوظة مسبقاً'); return; }
+  state.favorites.unshift(state.currentRecipe);
+  saveData();
+  showToast('📜 تمت إضافة المخطوطة للمفضلة');
+}
+
+function copyRecipe() {
+  const r = state.currentRecipe;
+  if (!r) return;
+  const txt = `${r.name}\nالمكونات:\n${document.getElementById('rIngredients').innerText}\n\nالخطوات:\n${r.steps.join('\n')}`;
+  navigator.clipboard.writeText(txt).then(() => showToast('📋 تم نسخ المخطوطة'));
+}
+
+function renderArchive() {
+  const list = document.getElementById('archiveList');
+  const empty = document.getElementById('archiveEmpty');
+  if (!state.favorites.length) { empty.classList.remove('hidden'); list.innerHTML = ''; return; }
+  empty.classList.add('hidden');
+  list.innerHTML = state.favorites.map(r => {
+    const isCert = !!state.certifications[r.id];
+    return `
+      <div class="card mb-3">
+        <div class="flex justify-between items-center mb-1">
+          <h4 class="bold neon-text">${r.name}</h4>
+          ${isCert ? '<span class="badge badge-agent">🛡️ معتمد</span>' : ''}
+        </div>
+        <p class="text-tiny text-muted mb-2">${r.tagline}</p>
+        <button onclick='loadArchived(${JSON.stringify(r)})' class="btn btn-ghost btn-sm">🔮 قراءة المخطوطة</button>
+      </div>
+    `;
+  }).join('');
+}
+
+function loadArchived(r) {
+  state.currentRecipe = r;
+  switchTab('lab');
+  renderRecipe(r);
+}
+
+function saveData() {
+  safeSetStorage('pro_ck_user', state.user);
+  safeSetStorage('pro_ck_favs', state.favorites);
+  safeSetStorage('pro_ck_shop', state.shopping);
+  safeSetStorage('pro_ck_users', state.users);
+  safeSetStorage('pro_ck_pantry', state.pantry);
+  safeSetStorage('pro_ck_ratings', state.ratings);
+  safeSetStorage('pro_ck_certs', state.certifications);
+  safeSetStorage('pro_ck_cfg', state.settings);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+</script>
+</body>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0d0806">
+
+</html>
